@@ -82,22 +82,27 @@
 		   <artifactId>sqljdbc4</artifactId>
 		   <version>4.0</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.6.9.Final</version>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>4.2.20.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>3.6.9.Final</version>
-		</dependency> --> 
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>4.2.20.RELEASE</version>
+		</dependency>
 		<dependency>
-        <groupId>org.eclipse.persistence</groupId>
-        <artifactId>eclipselink</artifactId>
-        <version>2.6.0</version>
-    </dependency>
-    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-web</artifactId>
+	        <version>4.2.20.RELEASE</version>
+	    </dependency>
+		<dependency>
+	        <groupId>org.eclipse.persistence</groupId>
+	        <artifactId>eclipselink</artifactId>
+	        <version>2.6.0</version>
+    	</dependency>
+    	<dependency>
 		    <groupId>org.springframework.data</groupId>
 		    <artifactId>spring-data-jpa</artifactId>
 		    <version>2.4.0</version>
@@ -107,6 +112,11 @@
             <artifactId>spring-data-rest-webmvc</artifactId>
             <version>2.0.0.RELEASE</version>
         </dependency>
+        <dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt</artifactId>
+		    <version>0.9.1</version>
+		</dependency>
   </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>

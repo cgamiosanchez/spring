@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Import;
 @Import(value = {
        ServicesConfig.class,
        RepositoryConfig.class,
-       WSRSConfig.class
+       WSRSConfig.class,
+       SecurityConfig.class,
+       ComponentConfig.class
 })
 public class RootConfig {
 

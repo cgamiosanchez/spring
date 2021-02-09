@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.ws.rs.Path;
 import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.Bus;
@@ -19,13 +21,13 @@ import org.apache.cxf.jaxrs.provider.XPathProvider;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 import edu.practica.endpoints.BancoServiceImpl;
-import edu.practica.web.BancoResources;
 
 @Configuration
 @ComponentScan(basePackages= {"edu.practica.endpoints"})
@@ -50,11 +52,7 @@ public class WSRSConfig {
 	@Bean
     public Jaxb2Marshaller jaxb2Marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-       
-        // "alternative/additiona - ly":
-           //marshaller.setContextPath(contextPath); (<jaxb.context-file>)
-           marshaller.setPackagesToScan("edu.practica");
-
+        marshaller.setPackagesToScan("edu.practica");
         marshaller.setMarshallerProperties(new HashMap<String, Object>() {{
           put(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, true);
           // set more properties here...
@@ -64,12 +62,14 @@ public class WSRSConfig {
     }
 	
 	@Autowired
-	BancoResources bancoResources;
+	private ApplicationContext appContext;
 	
 	@Bean
 	public Server rsServer() {
 		JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
-	    factory.setServiceBeans(Arrays.<Object>asList(bancoResources));
+		Map<String, Object> beans = appContext.getBeansWithAnnotation(Path.class);
+		List<Object> valueList = new ArrayList<Object>(beans.values());
+		factory.setServiceBeans(valueList);
 	    factory.setAddress("/");
 	    factory.setBus(springBus());
 	    factory.setProviders(Arrays.<Object>asList(getProvider()));
